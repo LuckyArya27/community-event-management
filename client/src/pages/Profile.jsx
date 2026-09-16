@@ -53,7 +53,7 @@ export default function Profile() {
 
     setSaving(true);
     try {
-      await updateUserApi(user.user_id, payload);
+      await updateUserApi(payload);
       await updateUser();
       setPassword('');
       setConfirmPassword('');
@@ -75,7 +75,7 @@ export default function Profile() {
     setDeleteError('');
     setDeleting(true);
     try {
-      await permanentDeleteUser(user.user_id);
+      await permanentDeleteUser();
       logout();
       navigate('/login');
     } catch (error) {

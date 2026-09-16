@@ -13,9 +13,9 @@ import {
 router.get("/", getUsersUsingQuery);
 router.get("/me", getOneUserDetails);
 router.get("/:id", getOneUserDetails);
-router.patch("/:id", updateUserDetails);
+router.patch("/", updateUserDetails);
 router.delete("/:id/soft-delete", softDeleteUser);
 router.patch("/:id/unban", unBanUser);
-router.delete("/:id/hard-delete", hardDeleteUser);
+router.delete("/hard-delete", hardDeleteUser);
 
 export default router;

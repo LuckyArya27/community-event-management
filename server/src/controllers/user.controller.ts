@@ -108,7 +108,7 @@ const getOneUserDetails = async (req: Request, res: Response): Promise<Response>
 };
 
 const updateUserDetails = async (req: Request, res: Response): Promise<Response> => {
-  const user_id: string | undefined = (req.params.id) as string | undefined;
+  const user_id: string | undefined = req.user?.user_id;
   assertOwnerOrRole(req.user, user_id as string);
   try {
     if (!req.user) {
@@ -236,7 +236,7 @@ const unBanUser = async (req: Request, res: Response): Promise<Response> => {
 }
 
 const hardDeleteUser = async (req: Request, res: Response): Promise<Response> => {
-  const user_id: string | undefined = (req.params.id) as string | undefined;
+  const user_id: string | undefined = req.user?.user_id;
   try {
     assertOwnerOrRole(req.user, user_id as string);
 

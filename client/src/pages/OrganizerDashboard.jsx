@@ -359,9 +359,6 @@ export default function OrganizerDashboard() {
     load();
   }, [load]);
 
-  // Keeps /organizer/events/new working as a direct link/URL (e.g. the
-  // NavBar "Create Event" item) even if this component instance persists
-  // across the route change rather than remounting.
   useEffect(() => {
     if (location.pathname === '/organizer/events/new') {
       setEditingEvent(null);

@@ -21,6 +21,7 @@ function EventCard({ event }) {
   const percentFull = event.capacity > 0 ? Math.min(100, (registered / event.capacity) * 100) : 0;
   const isCancelled = event.status === 'cancelled';
   const isCompleted = event.status === 'completed';
+  const isClosed = event.status === 'closed';
 
   return (
     <Link to={`/events/${event.event_id}`}>
@@ -42,7 +43,7 @@ function EventCard({ event }) {
 
           {!isCancelled && (
             <>
-            {!isCompleted && (
+            {!isCompleted && !isClosed && (
             <div className='mt-1'>
               <div className='flex justify-between text-xs text-slate-500 mb-1'>
                 <span>Capacity</span>

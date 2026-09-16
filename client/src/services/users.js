@@ -14,8 +14,8 @@ export function getUser(id) {
   return apiRequest(`/users/${id}`);
 }
 
-export function updateUser(id, payload) {
-  return apiRequest(`/users/${id}`, {
+export function updateUser(payload) {
+  return apiRequest(`/users`, {
     method: 'PATCH',
     body: JSON.stringify(payload),
   });
@@ -33,8 +33,8 @@ export function unbanUser(id) {
   });
 }
 
-export function permanentDeleteUser(id) {
-  return apiRequest(`/users/${id}/hard-delete`, {
+export function permanentDeleteUser() {
+  return apiRequest('/users/hard-delete', {
     method: 'DELETE',
   });
 }

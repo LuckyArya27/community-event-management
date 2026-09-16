@@ -6,6 +6,7 @@ import { BadRequestError, NotFoundError, InternalServerError } from '../error-ha
 import * as encryption from '../utils/encryption';
 import { loginUser, NewUser } from '../utils/interfaces';
 import { generateJWTToken } from '../utils/token';
+import { clearRedisCache } from '../config/redis-config';
 
 const login = async (req: Request, res: Response): Promise<Response> => {
   try {
@@ -70,6 +71,7 @@ const createUser = async (req: Request, res: Response): Promise<Response> => {
       newUser.name,
       newUser.role
     );
+    await clearRedisCache('users:*');
     return res.status(StatusCodes.CREATED).json({ message: 'User created successfully', token });
   } catch (error) {
     if (error instanceof Error && 'statusCode' in error) {
@@ -100,6 +102,7 @@ const createAdmin = async (req: Request, res: Response): Promise<Response> => {
       role: 'admin'
     };
     const newUser = await UserDAO.createUser(adminData);
+    await clearRedisCache('users:*');
     return res.status(StatusCodes.CREATED).json(newUser);
   } catch (error) {
     if (error instanceof Error && 'statusCode' in error) {
